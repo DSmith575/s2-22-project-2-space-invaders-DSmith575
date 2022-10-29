@@ -13,9 +13,11 @@ namespace Space_Invaders
         protected bool isAlive;
         protected Point position;
 
+
         protected int width;
         protected int height;
 
+        //Main class for holding player and alien variables.
 
         public Ships(Bitmap bitmap, Graphics graphics, bool isAlive, Point position, int width, int height)
         {
@@ -25,9 +27,11 @@ namespace Space_Invaders
             this.position = position;
             this.width = width;
             this.height = height;
+
         }
 
 
+        //If the player/alien bool is true, draws the player to the screen
         public void DrawPlayer()
         {
             if (isAlive == true)
@@ -36,6 +40,7 @@ namespace Space_Invaders
             }
         }
 
+        //Gets current width, height, poisition and bool status
         public int Width
         {
             get { return width; }
@@ -59,6 +64,9 @@ namespace Space_Invaders
             get { return isAlive; }
             set { isAlive = value; }
         }
+
+
+        public abstract void Move();
 
 
     }

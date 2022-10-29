@@ -2,7 +2,7 @@ namespace Space_Invaders
 {
     public partial class Form1 : Form
     {
-
+        private Random rand;
         private Graphics graphics;
         private Graphics bufferGraphics;
         private Image bufferImage;
@@ -17,11 +17,11 @@ namespace Space_Invaders
             boundries = new Point(Width, Height);
 
             graphics = CreateGraphics();
-            bufferImage = new Bitmap(ClientSize.Width, ClientSize.Height);
+            bufferImage = new Bitmap(Width, Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
             timer1.Enabled = true;
             DoubleBuffered = true;
-            controller = new Controller(boundries, graphics);
+            controller = new Controller(boundries, graphics, rand);
             controller.boundries = ClientSize;
 
 
@@ -31,7 +31,27 @@ namespace Space_Invaders
         {
             graphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);
             controller.GameRun();
+            graphics.DrawImage(bufferImage, 0, 0, Width, Height);
 
+ 
+
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Left:
+                    controller.PlayerMovement(EDirection.Left);
+                    break;
+
+                case Keys.Right:
+                    controller.PlayerMovement(EDirection.Right);
+                    break;
+
+                default:
+                    break;
+            }
         }
     }
 }

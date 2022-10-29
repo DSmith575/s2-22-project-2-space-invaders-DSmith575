@@ -16,12 +16,9 @@ namespace Space_Invaders
         private int boundryHeight;
 
 
-        public Controller(Point boundries, Graphics graphics)
+        public Controller(Point boundries, Graphics graphics, Random rand)
         {
-            rand = new Random();
-            playShip = Properties.Resources.Player;
-            boundryWidth = boundries.X;
-            boundryHeight = boundries.Y;
+            SetVariables(boundries);
             player = new Player(playShip, graphics, true, new Point(boundryHeight, boundryWidth), playShip.Width, playShip.Height);
         }
 
@@ -29,6 +26,22 @@ namespace Space_Invaders
         {
             player.DrawPlayer();
         }
+
+        public void SetVariables(Point boundries)
+        {
+            rand = new Random();
+            playShip = Properties.Resources.Player;
+            boundryWidth = boundries.X;
+            boundryHeight = boundries.Y;
+        }
+
+        //Method to move the player left and right
+        public void PlayerMovement(EDirection direction)
+        {
+            player.Direction = direction;
+            player.Move();
+        }
+
 
         public Size boundries
         {
