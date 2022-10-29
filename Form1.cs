@@ -22,7 +22,6 @@ namespace Space_Invaders
             timer1.Enabled = true;
             DoubleBuffered = true;
             controller = new Controller(boundries, graphics, rand);
-            controller.boundries = ClientSize;
 
 
         }

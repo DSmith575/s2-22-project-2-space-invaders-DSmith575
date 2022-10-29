@@ -31,7 +31,7 @@ namespace Space_Invaders
         {
             rand = new Random();
             playShip = Properties.Resources.Player;
-            boundryWidth = boundries.X;
+            boundryWidth = boundries.X + playShip.Height;
             boundryHeight = boundries.Y;
         }
 
@@ -43,11 +43,12 @@ namespace Space_Invaders
         }
 
 
-        public Size boundries
+        public Point boundries
         {
             get;
             set;
         }
+
 
         //public void MovePlayer(EDirection Direction)
         //{

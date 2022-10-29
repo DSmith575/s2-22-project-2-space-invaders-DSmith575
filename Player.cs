@@ -35,7 +35,7 @@ namespace Space_Invaders
                     position.X -= 20;
                     break;
                 case EDirection.Right:
-                    //if (position.X)
+                    //if (position.X + width < boundries.Width)
                         position.X += 20;
                     break;
 
