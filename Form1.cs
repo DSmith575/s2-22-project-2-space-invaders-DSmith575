@@ -21,8 +21,8 @@ namespace Space_Invaders
             bufferGraphics = Graphics.FromImage(bufferImage);
             timer1.Enabled = true;
             DoubleBuffered = true;
-
             controller = new Controller(boundries, graphics);
+            controller.boundries = ClientSize;
 
 
         }

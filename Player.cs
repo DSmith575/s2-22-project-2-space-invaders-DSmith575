@@ -8,11 +8,11 @@ namespace Space_Invaders
 {
     public class Player : Ships
     {
-        public Player(Bitmap bitmap, Graphics graphics, bool isAlive, Point boundries, Point position) : base(bitmap, graphics, isAlive, boundries, position)
+
+        public Player(Bitmap bitmap, Graphics graphics, bool isAlive, Point position, int width, int height)
+            : base(bitmap, graphics, isAlive, position, width, height)
         {
-
         }
-
 
 
 
