@@ -12,8 +12,8 @@ namespace Space_Invaders
         public Form1()
         {
             InitializeComponent();
-            Width = ClientSize.Width;
-            Height = ClientSize.Height;
+            Width = Screen.PrimaryScreen.Bounds.Width;
+            Height = Screen.PrimaryScreen.Bounds.Height;
             boundries = new Point(Width, Height);
 
             graphics = CreateGraphics();
@@ -35,6 +35,8 @@ namespace Space_Invaders
  
 
         }
+
+
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {

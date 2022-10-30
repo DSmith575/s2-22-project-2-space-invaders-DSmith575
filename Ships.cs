@@ -40,19 +40,9 @@ namespace Space_Invaders
             }
         }
 
-        //Gets current width, height, poisition and bool status
-        public int Width
-        {
-            get { return width; }
-            set { width = value; }
-        }
 
-        public int Height
-        {
-            get { return height; }
-            set { width = value; }
-        }
 
+        //Gets/Sets position and bool status
         public Point Position
         {
             get { return position; }

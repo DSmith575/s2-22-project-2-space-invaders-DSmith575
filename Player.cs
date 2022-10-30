@@ -19,7 +19,6 @@ namespace Space_Invaders
         }
 
 
-
         //Moves the player X amount of pixels depending if Left or Right keys have been
         //Pressed or held
 
@@ -27,7 +26,8 @@ namespace Space_Invaders
         {
 
 
-
+            //Checks if the image is > 0 then moves the image left, else stops at position 0
+            //If position.X is less than or equal to the screen width minus the image height. stops the image from moving off the right of screen
             switch (direction)
             {
                 case EDirection.Left:
@@ -35,7 +35,7 @@ namespace Space_Invaders
                     position.X -= 20;
                     break;
                 case EDirection.Right:
-                    //if (position.X + width < boundries.Width)
+                    if (position.X <= Screen.PrimaryScreen.Bounds.Width - height)
                         position.X += 20;
                     break;
 
@@ -44,11 +44,6 @@ namespace Space_Invaders
             }
         }
 
-        public Size boundries
-        {
-            get;
-            set;
-        }
 
 
         public EDirection Direction

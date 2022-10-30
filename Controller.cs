@@ -19,19 +19,24 @@ namespace Space_Invaders
         public Controller(Point boundries, Graphics graphics, Random rand)
         {
             SetVariables(boundries);
-            player = new Player(playShip, graphics, true, new Point(boundryHeight, boundryWidth), playShip.Width, playShip.Height);
+            player = new Player(playShip, graphics, true, new Point(boundryHeight/2, boundryWidth/2), playShip.Width, playShip.Height);
         }
 
+
+        //Main method that runs on every timer tick
+        //Draws player
+        //
         public void GameRun()
         {
             player.DrawPlayer();
         }
 
+        //Method to set up variables for game control
         public void SetVariables(Point boundries)
         {
             rand = new Random();
             playShip = Properties.Resources.Player;
-            boundryWidth = boundries.X + playShip.Height;
+            boundryWidth = boundries.X - playShip.Height; //Sets player X position to the value of boundries - the image height to display above taskbar
             boundryHeight = boundries.Y;
         }
 
@@ -43,17 +48,13 @@ namespace Space_Invaders
         }
 
 
+
+        //Gets and sets X&Y size of screen
         public Point boundries
         {
             get;
             set;
         }
 
-
-        //public void MovePlayer(EDirection Direction)
-        //{
-        //    player.Direction = Direction;
-        //    player.Mov
-        //}
     }
 }
