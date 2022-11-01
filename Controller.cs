@@ -9,8 +9,10 @@ namespace Space_Invaders
     public class Controller
     {
         private Bitmap playShip;
+        private Bitmap alienS;
         private Random rand;
         private Player player;
+        private AlienShip alien;
 
         private int boundryWidth;
         private int boundryHeight;
@@ -20,6 +22,7 @@ namespace Space_Invaders
         {
             SetVariables(boundries);
             player = new Player(playShip, graphics, true, new Point(boundryHeight/2, boundryWidth/2), playShip.Width, playShip.Height);
+            alien = new AlienShip(alienS, graphics, true, new Point(0, 0+alienS.Height), alienS.Width, alienS.Height);
         }
 
 
@@ -29,6 +32,7 @@ namespace Space_Invaders
         public void GameRun()
         {
             player.DrawPlayer();
+            alien.DrawAlien();
         }
 
         //Method to set up variables for game control
@@ -36,7 +40,8 @@ namespace Space_Invaders
         {
             rand = new Random();
             playShip = Properties.Resources.Player;
-            boundryWidth = boundries.X - playShip.Height; //Sets player X position to the value of boundries - the image height to display above taskbar
+            alienS = Properties.Resources.EnemyShip;
+            boundryWidth = boundries.X; //Sets player X position to the value of boundries
             boundryHeight = boundries.Y;
         }
 
