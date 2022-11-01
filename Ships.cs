@@ -40,6 +40,14 @@ namespace Space_Invaders
             }
         }
 
+        public void DrawAlien()
+        {
+            if (isAlive == true)
+            {
+                graphics.DrawImage(bitmap, position);
+            }
+        }
+
 
 
         //Gets/Sets position and bool status
