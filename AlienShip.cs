@@ -10,25 +10,49 @@ namespace Space_Invaders
     public class AlienShip : Ships
     {
 
-        private const int DROPSPEED = 20;
-        private const int DIRECTSHIFT = -1;
-        private int velocity = 20;
+        private const int DROPSPEED = 30;
+        private const int VELOCITY = 20;
+        private bool movement = false;
 
         public AlienShip(Bitmap bitmap, Graphics graphics, bool isAlive, Point position, int width, int height)
             : base(bitmap, graphics, isAlive, position, width, height)
         {
+          
         }
 
 
         public override void Move()
         {
-            if (position.X > 0)
+
+            switch (movement)
             {
-                position.X -= 20;
-            }
-            if (position.X <= Screen.PrimaryScreen.Bounds.Width - height)
-            {
-                position.X += 20;
+                case false:
+                    if (position.X < Screen.PrimaryScreen.Bounds.Width - width)
+                    {
+                        position.X += VELOCITY;
+                    }
+                    if (position.X  >= Screen.PrimaryScreen.Bounds.Width - width)
+                    {
+                        movement = true;
+                        position.Y += DROPSPEED;
+                    }
+                    break;
+
+                case true:
+                    if (position.X != 0)
+                    {
+                        position.X -= VELOCITY;
+                        if (position.X == 0)
+                        {
+                            movement = false;
+                            position.Y += DROPSPEED;
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
+
             }
         }
 

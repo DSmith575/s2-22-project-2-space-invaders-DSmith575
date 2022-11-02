@@ -22,7 +22,7 @@ namespace Space_Invaders
         {
             SetVariables(boundries);
             player = new Player(playShip, graphics, true, new Point(boundryHeight/2, boundryWidth/2), playShip.Width, playShip.Height);
-            alien = new AlienShip(alienS, graphics, true, new Point(0, 0+alienS.Height), alienS.Width, alienS.Height);
+            alien = new AlienShip(alienS, graphics, true, new Point(1500, 0+alienS.Height), alienS.Width, alienS.Height);
         }
 
 
@@ -33,6 +33,7 @@ namespace Space_Invaders
         {
             player.DrawPlayer();
             alien.DrawAlien();
+            alien.Move();
         }
 
         //Method to set up variables for game control
@@ -50,6 +51,7 @@ namespace Space_Invaders
         {
             player.Direction = direction;
             player.Move();
+
         }
 
 
