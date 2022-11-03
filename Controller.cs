@@ -13,6 +13,7 @@ namespace Space_Invaders
         private Random rand;
         private Player player;
         private AlienShip alien;
+        private AlienFleet alienFleet;
 
         private int boundryWidth;
         private int boundryHeight;
@@ -22,7 +23,7 @@ namespace Space_Invaders
         {
             SetVariables(boundries);
             player = new Player(playShip, graphics, true, new Point(boundryHeight/2, boundryWidth/2), playShip.Width, playShip.Height);
-            alien = new AlienShip(alienS, graphics, true, new Point(1500, 0+alienS.Height), alienS.Width, alienS.Height);
+            alienFleet = new AlienFleet(graphics);
         }
 
 
@@ -32,8 +33,11 @@ namespace Space_Invaders
         public void GameRun()
         {
             player.DrawPlayer();
-            alien.DrawAlien();
-            alien.Move();
+            //alien.DrawAlien();
+            //alien.Move();
+            alienFleet.DrawFleet();
+            alienFleet.Movement();
+            
         }
 
         //Method to set up variables for game control
@@ -41,7 +45,6 @@ namespace Space_Invaders
         {
             rand = new Random();
             playShip = Properties.Resources.Player;
-            alienS = Properties.Resources.EnemyShip;
             boundryWidth = boundries.X; //Sets player X position to the value of boundries
             boundryHeight = boundries.Y;
         }

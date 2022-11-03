@@ -10,14 +10,13 @@ namespace Space_Invaders
     public class AlienShip : Ships
     {
 
-        private const int DROPSPEED = 30;
+        private const int DROPSPEED = 100;
         private const int VELOCITY = 20;
         private bool movement = false;
 
         public AlienShip(Bitmap bitmap, Graphics graphics, bool isAlive, Point position, int width, int height)
             : base(bitmap, graphics, isAlive, position, width, height)
         {
-          
         }
 
 
@@ -60,5 +59,7 @@ namespace Space_Invaders
         {
             position.Y += velocity;
         }
+
+
     }
 }
