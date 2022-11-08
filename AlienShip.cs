@@ -12,9 +12,8 @@ namespace Space_Invaders
 
         private AlienFleet fleet;
 
-        private const int VELOCITY = 100;
+        private const int VELOCITY = 20;
         private bool movement = false;
-        private const int DROPSPEED = 25;
 
         public AlienShip(Bitmap bitmap, Graphics graphics, bool isAlive, Point position, int width, int height)
             : base(bitmap, graphics, isAlive, position, width, height)
@@ -23,14 +22,12 @@ namespace Space_Invaders
         }
 
 
-
-
-
-
         public void ShiftDown(int velocity)
         {
             position.Y += velocity;
         }
+
+
         public override void Move()
         {
             switch (movement)

@@ -40,14 +40,15 @@ namespace Space_Invaders
         public void GameRun()
         {
             player.DrawPlayer();
+            alienFleet.DrawFleet();
+            missileList.DrawM();
+            AlienCollision();
             //alien.DrawAlien();
             //alien.Move();
-
             alienFleet.Movement();
-            missileList.DrawM();
-            alienFleet.DrawFleet();
             missileList.MoveMissile();
             missileList.LifeCheck();
+
 
 
         }
@@ -60,6 +61,7 @@ namespace Space_Invaders
             boundryWidth = boundries.X; //Sets player X position to the value of boundries
             boundryHeight = boundries.Y;
 
+
         }
 
         //Method to move the player left and right
@@ -70,10 +72,34 @@ namespace Space_Invaders
 
         }
 
+
+        //On each space bar, creates a missile at the players location, with a random time limit on how long it can stay on screen
+        //Each timer tick redues the life value
         public void PlayerFire()
         {
             missileList.SpawnMissile(graphics, new Point(player.Position.X + 2, player.Position.Y), rand.Next(1, LIFELIMITTIME));
         }
+
+
+
+        //Checks each row and column of alien fleet ships
+        //if a missile touches an alien ship, both that missile and the alien ship are removed from their lists
+        public void AlienCollision()
+        {
+            for (int i = 0; i < missileList.PlayerMissiles.Count; i++)
+            {
+                for (int j = 0; j < alienFleet.AlienShips.Count; j++)
+                {
+                    if (missileList.PlayerMissiles[i].rect().IntersectsWith(alienFleet.AlienShips[j].rect()))
+                    {
+                        missileList.PlayerMissiles.Remove(missileList.PlayerMissiles[i]);
+                        alienFleet.AlienShips.Remove(alienFleet.AlienShips[j]);
+                        break;
+                    }
+                }
+            }
+        }
+
 
         //Gets and sets X&Y size of screen
         public Point boundries

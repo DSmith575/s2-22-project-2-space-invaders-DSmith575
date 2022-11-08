@@ -10,21 +10,19 @@ namespace Space_Invaders
     public abstract class Weapon
     {
 
-        protected const int VELOCITY = 20;
+        protected const int VELOCITY = 100;
         protected Bitmap bmp;
         protected Graphics graphics;
-        protected bool isAlive;
         protected Point position;
         protected int width;
         protected int height;
         protected int lifeLimit;
         
 
-        public Weapon(Bitmap bmp, Graphics graphics, bool isAlive, Point position, int width, int height, int lifeLimit)
+        public Weapon(Bitmap bmp, Graphics graphics, Point position, int width, int height, int lifeLimit)
         {
             this.bmp = bmp;
             this.graphics = graphics;
-            this.isAlive = isAlive;
             this.position = position;
             this.width = width;
             this.height = height;
@@ -43,6 +41,7 @@ namespace Space_Invaders
             this.position.Y -= VELOCITY;
         }
 
+ 
         public int LifeLimit
         {
             get => lifeLimit;
@@ -55,17 +54,16 @@ namespace Space_Invaders
             set { position = value; }
         }
 
-        public bool Alive
-        {
-            get { return isAlive; }
-            set { isAlive = value; }
-        }
-
         public int Width
         {
             get { return width; }
             set { width = value; }
 
+        }
+
+        public Rectangle rect()
+        {
+            return new Rectangle(position.X, position.Y, width, height);
         }
 
     }

@@ -8,11 +8,8 @@ namespace Space_Invaders
 {
     public class PlayerMissile : Weapon
     {
-        public PlayerMissile(Bitmap bmp, Graphics graphics, bool isAlive, Point position, int width, int height, int lifeLimit) 
-            : base(bmp, graphics, isAlive, position, width, height, lifeLimit)
+        public PlayerMissile(Bitmap bmp, Graphics graphics, Point position, int width, int height, int lifeLimit) : base(bmp, graphics, position, width, height, lifeLimit)
         {
-
         }
-
     }
 }

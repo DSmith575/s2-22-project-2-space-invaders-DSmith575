@@ -70,6 +70,11 @@ namespace Space_Invaders
 
         }
 
+        public Rectangle rect()
+        {
+            return new Rectangle(position.X, position.Y, width, height);
+        }
+
 
         public abstract void Move();
 

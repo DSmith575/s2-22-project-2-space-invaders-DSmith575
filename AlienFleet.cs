@@ -31,6 +31,7 @@ namespace Space_Invaders
                 {
                     alienShips.Add(new AlienShip(alienS, graphics, true, new Point(i * GAP, j * GAP), alienS.Width, alienS.Height));
                 }
+                
             }
         }
 
