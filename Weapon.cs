@@ -1,56 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Space_Invaders
 {
-    public abstract class Ships
+    public abstract class Weapon
     {
-        protected Bitmap bitmap;
+
+        protected const int VELOCITY = 20;
+        protected Bitmap bmp;
         protected Graphics graphics;
         protected bool isAlive;
         protected Point position;
-
-
         protected int width;
         protected int height;
+        protected int lifeLimit;
+        
 
-        //Main class for holding player and alien variables.
-
-        public Ships(Bitmap bitmap, Graphics graphics, bool isAlive, Point position, int width, int height)
+        public Weapon(Bitmap bmp, Graphics graphics, bool isAlive, Point position, int width, int height, int lifeLimit)
         {
-            this.bitmap = bitmap;
+            this.bmp = bmp;
             this.graphics = graphics;
             this.isAlive = isAlive;
             this.position = position;
             this.width = width;
             this.height = height;
-
+            this.lifeLimit = lifeLimit;
         }
 
 
-        //If the player/alien bool is true, draws the player to the screen
-        public void DrawPlayer()
+        public void DrawMissile()
         {
-            if (isAlive == true)
-            {
-                graphics.DrawImage(bitmap, position);
-            }
+                graphics.DrawImage(bmp, position);
+
         }
 
-        public void DrawAlien()
+        public void MissileMovement()
         {
-            if (isAlive == true)
-            {
-                graphics.DrawImage(bitmap, position);
-            }
+            this.position.Y -= VELOCITY;
         }
 
+        public int LifeLimit
+        {
+            get => lifeLimit;
+            set => lifeLimit = value;
+        }
 
-
-        //Gets/Sets position and bool status
         public Point Position
         {
             get { return position; }
@@ -63,16 +61,12 @@ namespace Space_Invaders
             set { isAlive = value; }
         }
 
-        public int Width 
-        { 
+        public int Width
+        {
             get { return width; }
             set { width = value; }
 
         }
-
-
-        public abstract void Move();
-
 
     }
 }

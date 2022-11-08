@@ -50,6 +50,10 @@ namespace Space_Invaders
                     controller.PlayerMovement(EDirection.Right);
                     break;
 
+                case Keys.Space:
+                    controller.PlayerFire();
+                        break;
+
                 default:
                     break;
             }

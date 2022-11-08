@@ -12,13 +12,12 @@ namespace Space_Invaders
         private const int GAP = 40;
         private const int ROWS = 4;
         private const int COLS = 10;
-        private const int DROPYPOS = 25;
-        private const int VELOCITY = 20;
-
+        private const int DROPPOSY = 20;
 
         private Graphics graphics;
         private Bitmap alienS;
         private List<AlienShip> alienShips;
+
 
         public AlienFleet(Graphics graphics)
         {
@@ -35,6 +34,7 @@ namespace Space_Invaders
             }
         }
 
+        public List<AlienShip> AlienShips { get => alienShips; set => alienShips = value; }
 
         public void DrawFleet()
         {
@@ -47,13 +47,37 @@ namespace Space_Invaders
 
         public void Movement()
         {
-            foreach(AlienShip ship in alienShips)
+            foreach (AlienShip fleet in alienShips)
             {
-                ship.Move();
+            //if (alienShips[0].Position.X <= 0)
+            //{
+            //        fleet.ShiftDown(DROPPOSY);
+            //}
+            //if (alienShips[alienShips.Count - 1].Position.X + alienShips[alienShips.Count - 1].Width >= Screen.PrimaryScreen.Bounds.Width)
+            //{
+            //        fleet.ShiftDown(DROPPOSY);
+            //}
+                fleet.Move();
             }
+
+
+
+            //if (alienShips[0].Position.X < Screen.PrimaryScreen.Bounds.Width - alienShips[0].Width)
+            //{
+            //    alienShips[i].Movement(false); //RIGHT
+            //    //alienShips[i].ShiftDown(VELOCITY);
+            //}
+            //if (alienShips[alienShips.Count - 1].Position.X >= Screen.PrimaryScreen.Bounds.Width + alienShips[alienShips.Count -1].Width)
+            //{
+            //    //alienShips[i].ShiftDown(VELOCITY);
+            //    alienShips[i].Movement(true); //LEFT
+            //}
+
+            //for (int j = 0; j < alienShips.Count; j++)
+            //{
+            //    alienShips[i].Move();
+            //}
+
         }
-
-
-
     }
 }
