@@ -28,7 +28,7 @@ namespace Space_Invaders
             this.graphics = graphics;
             this.rand = rand;
             SetVariables(boundries);
-            player = new Player(playShip, graphics, true, new Point(boundryHeight/2, boundryWidth/2), playShip.Width, playShip.Height);
+            player = new Player(playShip, graphics, true, new Point(boundryHeight / 2, boundryWidth / 2), playShip.Width, playShip.Height);
             alienFleet = new AlienFleet(graphics);
             missileList = new MissileList(graphics);
         }
@@ -39,7 +39,7 @@ namespace Space_Invaders
         //
         public void GameRun()
         {
-            player.DrawPlayer();
+            player.DrawShips();
             alienFleet.DrawFleet();
             missileList.DrawM();
             AlienCollision();
@@ -48,6 +48,7 @@ namespace Space_Invaders
             alienFleet.Movement();
             missileList.MoveMissile();
             missileList.LifeCheck();
+            
 
 
 
