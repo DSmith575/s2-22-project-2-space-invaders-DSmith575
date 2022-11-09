@@ -32,7 +32,7 @@ namespace Space_Invaders
             {
                 case EDirection.Left:
                     if (position.X > 0)
-                    position.X -= 20;
+                        position.X -= 20;
                     break;
                 case EDirection.Right:
                     if (position.X <= Screen.PrimaryScreen.Bounds.Width - height)

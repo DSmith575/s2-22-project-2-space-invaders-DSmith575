@@ -32,20 +32,13 @@ namespace Space_Invaders
 
 
         //If the player/alien bool is true, draws the player to the screen
-        public void DrawPlayer()
+        //Do not currently need an alive checking bool.
+        public void DrawShips()
         {
-            if (isAlive == true)
-            {
-                graphics.DrawImage(bitmap, position);
-            }
-        }
-
-        public void DrawAlien()
-        {
-            if (isAlive == true)
-            {
-                graphics.DrawImage(bitmap, position);
-            }
+            //if (isAlive == true)
+            //{
+            graphics.DrawImage(bitmap, position);
+            //}
         }
 
 
@@ -63,8 +56,8 @@ namespace Space_Invaders
             set { isAlive = value; }
         }
 
-        public int Width 
-        { 
+        public int Width
+        {
             get { return width; }
             set { width = value; }
 

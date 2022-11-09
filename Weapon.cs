@@ -10,14 +10,14 @@ namespace Space_Invaders
     public abstract class Weapon
     {
 
-        protected const int VELOCITY = 100;
+        protected const int VELOCITY = 50;
         protected Bitmap bmp;
         protected Graphics graphics;
         protected Point position;
         protected int width;
         protected int height;
         protected int lifeLimit;
-        
+
 
         public Weapon(Bitmap bmp, Graphics graphics, Point position, int width, int height, int lifeLimit)
         {
@@ -32,7 +32,7 @@ namespace Space_Invaders
 
         public void DrawMissile()
         {
-                graphics.DrawImage(bmp, position);
+            graphics.DrawImage(bmp, position);
 
         }
 
@@ -41,7 +41,7 @@ namespace Space_Invaders
             this.position.Y -= VELOCITY;
         }
 
- 
+
         public int LifeLimit
         {
             get => lifeLimit;
