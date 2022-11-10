@@ -87,6 +87,7 @@ namespace Space_Invaders
         //if a missile touches an alien ship, both that missile and the alien ship are removed from their lists
         public void AlienCollision()
         {
+
             for (int i = 0; i < missileList.PlayerMissiles.Count; i++)
             {
                 for (int j = 0; j < alienFleet.AlienShips.Count; j++)
@@ -100,6 +101,11 @@ namespace Space_Invaders
                 }
             }
         }
+
+
+
+
+
 
 
         //Gets and sets X&Y size of screen
