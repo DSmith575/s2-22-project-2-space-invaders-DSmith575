@@ -20,5 +20,45 @@ namespace Space_Invaders
         }
 
 
+        //Method to add alien bombs to the list.
+        
+        
+        public void SpawnBombs(Graphics graphics, Point velocity, int lifeLimit)
+        {
+            alienBombs.Add(new AlienBomb(bmp, graphics, new Point(velocity.X, velocity.Y), bmp.Width, bmp.Height, lifeLimit));
+        }
+
+        //Draws bombs on screen when called
+        public void DrawB()
+        {
+            foreach(AlienBomb bomb in alienBombs)
+            {
+                bomb.DrawMissile();
+            }
+        }
+
+        //Moves bombs on the Y axis every timer tick
+        public void MoveBomb()
+        {
+            for (int i = 0; i < alienBombs.Count; i++)
+            {
+                alienBombs[i].BombMovement();
+            }
+        }
+
+        //Checks the current int value of "life limit" or the position of each bomb.
+        //int reduces each timer tick, and if reaches 0 removes that bomb from the list.
+        //If the bomb hits the end of the screen (player area) bomb is also removed from the list.
+        public void LifeCheckBomb()
+        {
+            for (int i = 0; i < alienBombs.Count; i++)
+            {
+                if ((alienBombs[i].LifeLimit == 0) || (alienBombs[i].Position.Y == Screen.PrimaryScreen.Bounds.Height))
+                {
+                    alienBombs.Remove(alienBombs[i]);
+                }
+            }
+        }
+
     }
 }

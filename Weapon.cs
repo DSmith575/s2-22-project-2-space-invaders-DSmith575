@@ -33,12 +33,16 @@ namespace Space_Invaders
         public void DrawMissile()
         {
             graphics.DrawImage(bmp, position);
-
         }
 
         public void MissileMovement()
         {
             this.position.Y -= VELOCITY;
+        }
+
+        public void BombMovement()
+        {
+            this.position.Y += VELOCITY;
         }
 
 
