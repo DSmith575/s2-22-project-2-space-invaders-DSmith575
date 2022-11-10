@@ -21,6 +21,7 @@ namespace Space_Invaders
             bufferGraphics = Graphics.FromImage(bufferImage);
             timer1.Enabled = true;
             DoubleBuffered = true;
+            rand = new Random();
             controller = new Controller(boundries, graphics, rand);
 
 

@@ -50,6 +50,13 @@ namespace Space_Invaders
         public void Movement()
         {
 
+            //foreach(AlienShip alienShip in alienShips)
+            //{
+            //    i
+            //}
+
+            //If the first alien in list position 0 is less than or equal to 0 (Boundry of left screen)
+            //Will drop every alien ship down the Y Axis and switchs a bool to true to make the fleet move to the other side of the screen
             if (alienShips[0].Position.X <= 0)
             {
                 foreach (AlienShip fleet in alienShips)
@@ -59,6 +66,8 @@ namespace Space_Invaders
                 }
             }
 
+            //Checks if the last position -1 (0-39) +plus the aliens image width is greater than or equal to the Width of the screen(Right Side)
+            //Drops each alien down the Y axis and switches the bool to false, making the ships move to the left
             if (alienShips[alienShips.Count - 1].Position.X + alienShips[alienShips.Count - 1].Width >= Screen.PrimaryScreen.Bounds.Width)
             {
                 foreach (AlienShip fleet in alienShips)
@@ -67,55 +76,35 @@ namespace Space_Invaders
                     movement = false;
                 }
             }
+            
+
+            //Checks current state of the bool variable and runs the appropriate movement method
+
+
+            switch(movement)
             {
-                if (movement == false)
-                {
-                    foreach(AlienShip fleet in alienShips)
+                case false:
+                    foreach (AlienShip fleet in alienShips)
                     {
                         fleet.MoveLeft();
                     }
-                }
-                if (movement == true)
-                    foreach (AlienShip fleet in alienShips)
-                    {
-                        fleet.MoveRight();
-                    }
+                    break;
+
+                case true:
+                    if (movement == true)
+                        foreach (AlienShip fleet in alienShips)
+                        {
+                            fleet.MoveRight();
+                        }
+                    break;
+
+                default:
+                    break;
             }
 
+            
 
         }
-
-
-//                    foreach (AlienShip fleet in alienShips)
-//            {
-//                if (alienShips[0].Position.X <= 0)
-//                {
-//                    fleet.ShiftDown(DROPPOSY);
-//                    movement = true;
-//                }
-//                if (alienShips[alienShips.Count - 1].Position.X + alienShips[alienShips.Count - 1].Width >= Screen.PrimaryScreen.Bounds.Width)
-//                {
-
-//                    fleet.ShiftDown(DROPPOSY);
-//                    movement = false;
-
-//                }
-
-//if (movement == false)
-//{
-
-//    fleet.MoveLeft();
-
-//}
-//if (movement == true)
-//{
-
-//    fleet.MoveRight();
-//}
-//            }
-
-
-
     }
 }
         

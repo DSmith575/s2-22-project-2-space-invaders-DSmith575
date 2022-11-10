@@ -8,21 +8,21 @@ namespace Space_Invaders
 {
     public class Controller
     {
+        //const variable dicating the last possible duration limit set by the rand for the value for missile/bomb "lifeLimit"
         private const int LIFELIMITTIME = 70;
 
         private Bitmap playShip;
-        private Bitmap alienS;
         private Random rand;
         private Player player;
-        private AlienShip alien;
         private AlienFleet alienFleet;
         private MissileList missileList;
+        private BombList bomblist;
         private Graphics graphics;
 
         private int boundryWidth;
         private int boundryHeight;
 
-
+        
         public Controller(Point boundries, Graphics graphics, Random rand)
         {
             this.graphics = graphics;
@@ -31,20 +31,18 @@ namespace Space_Invaders
             player = new Player(playShip, graphics, true, new Point(boundryHeight / 2, boundryWidth / 2), playShip.Width, playShip.Height);
             alienFleet = new AlienFleet(graphics);
             missileList = new MissileList(graphics);
+            bomblist = new BombList(graphics);
         }
 
 
         //Main method that runs on every timer tick
-        //Draws player
-        //
+        //Draws player, the alien/missile fleet/list collision dection, and movement
         public void GameRun()
         {
             player.DrawShips();
             alienFleet.DrawFleet();
             missileList.DrawM();
             AlienCollision();
-            //alien.DrawAlien();
-            //alien.Move();
             alienFleet.Movement();
             missileList.MoveMissile();
             missileList.LifeCheck();
@@ -88,6 +86,7 @@ namespace Space_Invaders
         public void AlienCollision()
         {
 
+            //Checks each missiles rectangle and if it touches an alien ship will remove both missile and alien from the form.
             for (int i = 0; i < missileList.PlayerMissiles.Count; i++)
             {
                 for (int j = 0; j < alienFleet.AlienShips.Count; j++)
