@@ -22,7 +22,7 @@ namespace Space_Invaders
             timer1.Enabled = true;
             DoubleBuffered = true;
             rand = new Random();
-            controller = new Controller(boundries, graphics, rand);
+            controller = new Controller(boundries, graphics, rand, timer1);
 
 
         }

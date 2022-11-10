@@ -10,7 +10,7 @@ namespace Space_Invaders
     public class AlienShip : Ships
     {
 
-        private const int VELOCITY = 20;
+        private const int VELOCITY = 100;
 
         public AlienShip(Bitmap bitmap, Graphics graphics, bool isAlive, Point position, int width, int height)
             : base(bitmap, graphics, isAlive, position, width, height)
@@ -24,6 +24,7 @@ namespace Space_Invaders
             position.Y += velocity;
         }
 
+        //Move moveLeft and MoveRight to MOvement(bool F/T)? Switch statement to call movement
         public void MoveLeft()
         {
             position.X -= VELOCITY;
@@ -35,6 +36,8 @@ namespace Space_Invaders
             position.X += VELOCITY;
 
         }
+
+
 
 
         public override void Move()

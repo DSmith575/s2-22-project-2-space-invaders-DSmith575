@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Timer = System.Windows.Forms.Timer;
 
 namespace Space_Invaders
 {
@@ -18,15 +19,18 @@ namespace Space_Invaders
         private MissileList missileList;
         private BombList bomblist;
         private Graphics graphics;
+        private Timer timer1;
+
 
         private int boundryWidth;
         private int boundryHeight;
 
         
-        public Controller(Point boundries, Graphics graphics, Random rand)
+        public Controller(Point boundries, Graphics graphics, Random rand, Timer timer1)
         {
             this.graphics = graphics;
             this.rand = rand;
+            this.timer1 = timer1;
             SetVariables(boundries);
             player = new Player(playShip, graphics, true, new Point(boundryHeight / 2, boundryWidth / 2), playShip.Width, playShip.Height);
             alienFleet = new AlienFleet(graphics);
@@ -39,17 +43,19 @@ namespace Space_Invaders
         //Draws player, the alien/missile fleet/list collision dection, and movement
         public void GameRun()
         {
-            player.DrawShips();
-            alienFleet.DrawFleet();
-            missileList.DrawM();
-            AlienCollision();
+            DrawRun();
             alienFleet.Movement();
             missileList.MoveMissile();
             missileList.LifeCheck();
-            
+            CollisionDetection();
+\
+        }
 
-
-
+        public void DrawRun()
+        {
+            player.DrawShips();
+            alienFleet.DrawFleet();
+            missileList.DrawM();
         }
 
         //Method to set up variables for game control
@@ -80,10 +86,17 @@ namespace Space_Invaders
         }
 
 
+        //Method that calls each collision method, instead of having multiple different ones in the gameRun method
+        public void CollisionDetection()
+        {
+            AlienCollisionMissile();
+            AlienBoundryCollision();
+            AlienPlayerCollision();
+        }
 
         //Checks each row and column of alien fleet ships
         //if a missile touches an alien ship, both that missile and the alien ship are removed from their lists
-        public void AlienCollision()
+        public void AlienCollisionMissile()
         {
 
             //Checks each missiles rectangle and if it touches an alien ship will remove both missile and alien from the form.
@@ -101,6 +114,37 @@ namespace Space_Invaders
             }
         }
 
+        //Method to check if any alien ship in the fleet has hit the bottom of the screen
+        //Stops the timer and runs the scoring method.
+        //Player loses
+        public void AlienBoundryCollision()
+        {
+
+            for (int i = 0; i < alienFleet.AlienShips.Count; i++)
+            {
+                if (alienFleet.AlienShips[i].Position.Y + alienFleet.AlienShips[i].Width >= boundryHeight)
+                {
+                    timer1.Enabled = false;
+                    //MoveToScoring
+                }
+            }
+        }
+
+
+        //Checks if anyalien Ships rectangle touches the players rectangle, disables the timer and moves the scoring method
+        //Player loses
+        public void AlienPlayerCollision()
+        {
+
+            for (int i = 0; i < alienFleet.AlienShips.Count; i++)
+            {
+                if (alienFleet.AlienShips[i].rect().IntersectsWith(player.rect()))
+                {
+                    timer1.Enabled=false;
+                    MessageBox.Show("Hit");
+                }
+            }
+        }
 
 
 
@@ -113,6 +157,9 @@ namespace Space_Invaders
             get;
             set;
         }
+
+
+
 
     }
 }
