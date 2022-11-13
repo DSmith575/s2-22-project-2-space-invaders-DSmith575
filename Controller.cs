@@ -44,11 +44,23 @@ namespace Space_Invaders
 
         }
 
+        //Method to set up variables for game control
+        public void SetVariables(Point boundries)
+        {
+            rand = new Random();
+            playShip = Properties.Resources.Player;
+            boundryWidth = boundries.X;
+            boundryHeight = boundries.Y;
+            missileLaunch = new SoundPlayer(Properties.Resources.blaster);
+            missileHit = new SoundPlayer(Properties.Resources.sfxS);
+            playerHit = new SoundPlayer(Properties.Resources.bomb);
+
+        }
+
         //Main method that runs on every timer tick
         // Draws objects (player, aliens, bombs, missiles
         public void GameRun()
         {
-
             DrawRun();
             CheckWin();
             MoveObjects();
@@ -67,26 +79,26 @@ namespace Space_Invaders
             bomblist.DrawB();
         }
 
+        //Method that calls each collision method, instead of having multiple different ones in the gameRun method
+        public void CollisionDetection()
+        {
+            AlienCollisionMissile();
+            AlienBoundryCollision();
+            AlienPlayerCollision();
+            PlayerHitByBomb();
+            BombMissileCollision();
+        }
+
 
         //Method containing all objects movement methods
         public void MoveObjects()
         {
-            alienFleet.Movement();
+            //alienFleet.Movement();
             missileList.MoveMissile();
             bomblist.MoveBomb();
         }
 
-        //Method to set up variables for game control
-        public void SetVariables(Point boundries)
-        {
-            rand = new Random();
-            playShip = Properties.Resources.Player;
-            boundryWidth = boundries.X;
-            boundryHeight = boundries.Y;
-            missileLaunch = new SoundPlayer(Properties.Resources.blaster);
-            missileHit = new SoundPlayer(Properties.Resources.sfxS);
-            playerHit = new SoundPlayer(Properties.Resources.bomb);
-        }
+
 
         //Method to move the player left and right
         public void PlayerMovement(EDirection direction)
@@ -123,15 +135,8 @@ namespace Space_Invaders
         }
 
 
-        //Method that calls each collision method, instead of having multiple different ones in the gameRun method
-        public void CollisionDetection()
-        {
-            AlienCollisionMissile();
-            AlienBoundryCollision();
-            AlienPlayerCollision();
-            PlayerHitByBomb();
-            BombMissileCollision();
-        }
+
+
 
         //O
         public void BombMissileCollision()
@@ -165,10 +170,20 @@ namespace Space_Invaders
                     {
                         missileHit.Play();
                         missileList.PlayerMissiles.Remove(missileList.PlayerMissiles[i]);
-                        if (alienFleet.AlienShips[j - 1].Alive != true) //(39 > 38) COLS before Rows
+
+                        //Using j-1 would out of bounds when hitting the ship[0]
+                        //Putting in the if statement below stopped an out of bounds error
+                        if (alienFleet.AlienShips[j] == alienFleet.AlienShips[0])
                         {
+                            alienFleet.AlienShips.Remove(alienFleet.AlienShips[j]);
+                            break;
+                        }
+                        if (alienFleet.AlienShips[j - 1].Alive != true) //(39 > 38) COLS before Rows   && alienFleet.AlienShips[j] != alienFleet.AlienShips[0]
+                        {
+
                             alienFleet.AlienShips[j - 1].Alive = true;
                         }
+
                         alienFleet.AlienShips.Remove(alienFleet.AlienShips[j]);
                         break; //Break here else if keeps running while the list has been altered (out of bounds error)
                     }

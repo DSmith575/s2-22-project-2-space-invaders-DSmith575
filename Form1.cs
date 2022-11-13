@@ -15,15 +15,16 @@ namespace Space_Invaders
             Width = Screen.PrimaryScreen.Bounds.Width;
             Height = Screen.PrimaryScreen.Bounds.Height;
             boundries = new Point(Width, Height);
-
             graphics = CreateGraphics();
             bufferImage = new Bitmap(Width, Height);
             bufferGraphics = Graphics.FromImage(bufferImage);
-            timer1.Enabled = true;
+            timer1.Enabled = false;
             DoubleBuffered = true;
             rand = new Random();
             controller = new Controller(boundries, graphics, rand, timer1);
 
+            resume.Visible = false;
+            menu.Visible = false;
 
         }
 
@@ -32,9 +33,6 @@ namespace Space_Invaders
             graphics.FillRectangle(Brushes.Black, 0, 0, Width, Height);
             controller.GameRun();
             graphics.DrawImage(bufferImage, 0, 0, Width, Height);
-
- 
-
         }
 
 
@@ -55,9 +53,56 @@ namespace Space_Invaders
                     controller.PlayerFire();
                         break;
 
+                case Keys.P:
+                    PauseMenu();
+                    break;
+
                 default:
                     break;
             }
+        }
+
+        public void MenuReturn()
+        {
+            timer1.Enabled = false;
+            newGame.Visible = true;
+            quit.Visible = true;
+            resume.Visible = false;
+            menu.Visible = false;
+        }
+
+        public void PauseMenu()
+        {
+            timer1.Enabled = false;
+            resume.Visible = true;
+            menu.Visible = true;
+        }
+
+        private void newGame_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+            newGame.Visible = false;
+            quit.Visible = false;
+            Focus();
+        }
+
+        private void resume_Click(object sender, EventArgs e)
+        {
+            timer1.Enabled = true;
+            resume.Visible = false;
+            menu.Visible = false;
+            Focus();
+        }
+
+        private void menu_Click(object sender, EventArgs e)
+        {
+            MenuReturn();
+
+        }
+
+        private void quit_Click(object sender, EventArgs e)
+        {
+            Environment.Exit(0);
         }
     }
 }
