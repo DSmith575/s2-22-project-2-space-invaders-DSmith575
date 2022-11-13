@@ -21,7 +21,7 @@ namespace Space_Invaders
         }
 
 
-        //Method to add missiles to list
+        //Method to add missiles to list so we can check and remove them when needed
         public void SpawnMissile(Graphics graphics, Point position, int lifeLimit)
         {
             if (playerMissiles.Count <= MAXONSCREEN)

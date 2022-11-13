@@ -21,7 +21,7 @@ namespace Space_Invaders
 
         private int lineCount; //variable for n lines in txt file
 
-        //Pulls the variables from controller class and adds them to an array
+        //Pulls 0 or 1 from controller methods "Check win/Check lose"
         public void StoreScores(int winner)
         {
             CreateScoreBoard();
@@ -82,6 +82,8 @@ namespace Space_Invaders
             }
         }
 
+        //Pulls all lines of information from the text file
+        //and displays via a message box
         public void LoadScoreToMessageBoxHighScores()
         {
             if (lineCount < MAXSCORELIST)

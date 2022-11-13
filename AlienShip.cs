@@ -18,7 +18,8 @@ namespace Space_Invaders
             this.width = width;
         }
 
-
+        //When the first or last ship touches the left or right sides
+        //Calls this method to move every ship on screen down before moving to the other side
         public void ShiftDown(int velocity)
         {
             position.Y += velocity;
@@ -28,17 +29,12 @@ namespace Space_Invaders
         public void MoveLeft()
         {
             position.X -= VELOCITY;
-
         }
 
         public void MoveRight()
         {
             position.X += VELOCITY;
-
         }
-
-
-
 
         public override void Move()
         {

@@ -22,4 +22,8 @@ Audio Used:
 <br>
 https://undertale-resources.tumblr.com/categories
 <br>
-
+# MISC
+<br>
+I could have kept weapon/bomb/missiles together with the Ship class as one whole class
+<br>
+but decided to seperate because it was easier for me to get where I needed, even though it's using the same code which we don't want.

@@ -33,7 +33,7 @@ namespace Space_Invaders
 
         private int boundryWidth;
         private int boundryHeight;
-        
+
 
         public Controller(Point boundries, Graphics graphics, Random rand, Timer timer1)
         {
@@ -122,10 +122,10 @@ namespace Space_Invaders
         {
             for (int i = 0; i < alienFleet.AlienShips.Count; i++)
             {
-                if (alienFleet.AlienShips[i].CanShoot== true)
+                if (alienFleet.AlienShips[i].CanShoot == true)
                 {
                     int bombChance = rand.Next(0, BOMBCHANCE);
-                    if (bombChance == 0)
+                    if (bombChance == BOMBCHANCE)
                     {
                         bomblist.SpawnBombs(graphics, new Point(alienFleet.AlienShips[i].Position.X, alienFleet.AlienShips[i].Position.Y), rand.Next(1, LIFELIMITTIME));
                         missileLaunch.Play();
@@ -187,8 +187,6 @@ namespace Space_Invaders
             }
         }
 
-
-
         //Checks each alien bombs rectangle touches the players rectangle
         //If true, disables timer and displays you have lost
         public void PlayerHitByBomb()
@@ -242,7 +240,7 @@ namespace Space_Invaders
             {
                 timer1.Enabled = false;
                 MessageBox.Show("You Win!");
-                scores.StoreScores(0);
+                scores.StoreScores(0); //Pass int 0 for win
                 Application.Restart();
             }
         }
@@ -253,7 +251,7 @@ namespace Space_Invaders
         {
             timer1.Enabled = false;
             MessageBox.Show("You lose");
-            scores.StoreScores(1);
+            scores.StoreScores(1); //Pass int 1 for lose
             Application.Restart();
         }
 

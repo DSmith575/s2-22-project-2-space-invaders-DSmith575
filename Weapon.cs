@@ -20,7 +20,6 @@ namespace Space_Invaders
         protected int height;
         protected int lifeLimit;
 
-
         public Weapon(Bitmap bmp, Graphics graphics, Point position, int width, int height, int lifeLimit)
         {
             this.bmp = bmp;
@@ -30,7 +29,6 @@ namespace Space_Invaders
             this.height = height;
             this.lifeLimit = lifeLimit;
         }
-
 
         public void DrawMissile()
         {
@@ -46,7 +44,6 @@ namespace Space_Invaders
         {
             this.position.Y += VELOCITY;
         }
-
 
         public int LifeLimit
         {
