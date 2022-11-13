@@ -15,13 +15,15 @@ namespace Space_Invaders
         private const int LIFELIMITTIME = 70;
 
         private Bitmap playShip;
+        private Graphics graphics;
+        private Timer timer1;
         private Random rand;
+
         private Player player;
         private AlienFleet alienFleet;
         private MissileList missileList;
         private BombList bomblist;
-        private Graphics graphics;
-        private Timer timer1;
+
         private SoundPlayer missileLaunch;
         private SoundPlayer playerHit;
         private SoundPlayer missileHit;
@@ -30,7 +32,6 @@ namespace Space_Invaders
 
         private int boundryWidth;
         private int boundryHeight;
-
 
         public Controller(Point boundries, Graphics graphics, Random rand, Timer timer1)
         {
@@ -42,7 +43,6 @@ namespace Space_Invaders
             alienFleet = new AlienFleet(graphics);
             missileList = new MissileList(graphics);
             bomblist = new BombList(graphics);
-
         }
 
         //Method to set up variables for game control
@@ -56,7 +56,6 @@ namespace Space_Invaders
             missileHit = new SoundPlayer(Properties.Resources.sfxS);
             playerHit = new SoundPlayer(Properties.Resources.bomb);
             scores = new Scores();
-
         }
 
         //Main method that runs on every timer tick
@@ -91,16 +90,13 @@ namespace Space_Invaders
             BombMissileCollision();
         }
 
-
         //Method containing all objects movement methods
         public void MoveObjects()
         {
-            //alienFleet.Movement();
+            alienFleet.Movement();
             missileList.MoveMissile();
             bomblist.MoveBomb();
         }
-
-
 
         //Method to move the player left and right
         public void PlayerMovement(EDirection direction)
@@ -124,7 +120,7 @@ namespace Space_Invaders
         {
             for (int i = 0; i < alienFleet.AlienShips.Count; i++)
             {
-                if (alienFleet.AlienShips[i].Alive == true)
+                if (alienFleet.AlienShips[i].CanShoot== true)
                 {
                     int bombChance = rand.Next(0, 99);
                     if (bombChance == 0)
@@ -180,10 +176,10 @@ namespace Space_Invaders
                             alienFleet.AlienShips.Remove(alienFleet.AlienShips[j]);
                             break;
                         }
-                        if (alienFleet.AlienShips[j - 1].Alive != true) //(39 > 38) COLS before Rows   && alienFleet.AlienShips[j] != alienFleet.AlienShips[0]
+                        if (alienFleet.AlienShips[j - 1].CanShoot != true) //(39 > 38) COLS before Rows   && alienFleet.AlienShips[j] != alienFleet.AlienShips[0]
                         {
 
-                            alienFleet.AlienShips[j - 1].Alive = true;
+                            alienFleet.AlienShips[j - 1].CanShoot = true;
                         }
 
                         alienFleet.AlienShips.Remove(alienFleet.AlienShips[j]);
@@ -208,7 +204,6 @@ namespace Space_Invaders
                     break;
                 }
             }
-
         }
 
         //Method to check if any alien ship in the fleet has hit the bottom of the screen
@@ -216,7 +211,6 @@ namespace Space_Invaders
         //Player loses
         public void AlienBoundryCollision()
         {
-
             for (int i = 0; i < alienFleet.AlienShips.Count; i++)
             {
                 if (alienFleet.AlienShips[i].Position.Y + alienFleet.AlienShips[i].Width >= boundryHeight)
@@ -231,7 +225,6 @@ namespace Space_Invaders
         //Player loses
         public void AlienPlayerCollision()
         {
-
             for (int i = 0; i < alienFleet.AlienShips.Count; i++)
             {
                 if (alienFleet.AlienShips[i].rect().IntersectsWith(player.rect()))
@@ -242,7 +235,6 @@ namespace Space_Invaders
                 }
             }
         }
-
 
         //Checks if the alienFleet List count is 0
         //If true, disables the timer and displays that you have won.
@@ -268,20 +260,12 @@ namespace Space_Invaders
         }
 
 
-
-
-
-
-
         //Gets and sets X&Y size of screen
         public Point boundries
         {
             get;
             set;
         }
-
-
-
 
     }
 }

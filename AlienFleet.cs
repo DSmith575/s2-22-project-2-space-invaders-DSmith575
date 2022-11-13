@@ -13,13 +13,13 @@ namespace Space_Invaders
         private const int GAP = 40;
         private const int ROWS = 4;
         private const int COLS = 10;
-        private const int DROPPOSY = 100;
-        private bool movement = false;
+        private const int DROPPOSY = 50;
 
         private Graphics graphics;
         private Bitmap alienS;
         private List<AlienShip> alienShips;
 
+        private bool movement = false;
 
 
         public List<AlienShip> AlienShips { get => alienShips; set => alienShips = value; }

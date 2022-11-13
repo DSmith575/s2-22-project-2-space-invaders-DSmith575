@@ -10,13 +10,13 @@ namespace Space_Invaders
     {
         private const int MAXSCORELIST = 5;
         private const int NEWSCORE = 4; //Array position for inserting newest score to txt file
+
         private string[] addScore = new string[1];
 
         //Shifts the lineReader array to the left to make room for new highscores
         private string[] lineReader = new string[MAXSCORELIST];
         private string[] lineReaderShift = new string[MAXSCORELIST];
         private string result = " ";
-        private string highScoreDisplay = " ";
         private string displayScores = " ";
 
         private int lineCount; //variable for n lines in txt file
@@ -47,7 +47,6 @@ namespace Space_Invaders
             sw.Close();
         }
 
-
         //Writes from array to text file.
         public void SaveScores()
         {
@@ -63,14 +62,12 @@ namespace Space_Invaders
 
             if (lineCount >= MAXSCORELIST) //If there are more than 5 lines of text, sorts the arrays into a new array shifted left (remove first line)
             {
-
                 lineReader = File.ReadAllLines(@"../../HighScores.txt");
 
                 for (int i = 1; i < lineReader.Length; i++)
                 {
                     lineReaderShift[i - 1] = lineReader[i];
                 }
-
                 //Adds the latest score to the last slot of the array
                 lineReaderShift[NEWSCORE] = addScore[0];
 
@@ -84,7 +81,6 @@ namespace Space_Invaders
                 sw.Close();
             }
         }
-
 
         public void LoadScoreToMessageBoxHighScores()
         {

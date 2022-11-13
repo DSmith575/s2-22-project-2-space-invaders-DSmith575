@@ -11,9 +11,7 @@ namespace Space_Invaders
         private const int MAXONSCREEN = 15; //Maximum amount of missiles allowed on screen
 
         private Bitmap bmp;
-
         private List<PlayerMissile> playerMissiles;
-
         public List<PlayerMissile> PlayerMissiles { get => playerMissiles; set => playerMissiles = value; }
 
         public MissileList(Graphics graphics)

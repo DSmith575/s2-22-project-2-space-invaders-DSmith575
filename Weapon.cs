@@ -11,9 +11,11 @@ namespace Space_Invaders
     {
 
         protected const int VELOCITY = 20;
+
         protected Bitmap bmp;
         protected Graphics graphics;
         protected Point position;
+
         protected int width;
         protected int height;
         protected int lifeLimit;
@@ -62,7 +64,6 @@ namespace Space_Invaders
         {
             get { return width; }
             set { width = value; }
-
         }
 
         public Rectangle rect()

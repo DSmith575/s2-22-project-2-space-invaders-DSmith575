@@ -1,3 +1,33 @@
+/* Program name:          Space Invaders
+ * Project file name:     Space Invaders
+ * Author:                Deacon Smith
+ * Date:                  
+ * Language:              C#
+ * Platform:              Microsoft Visual Studio 2022
+ *
+ * Purpose:               Recreating Space Invaders for Programming 2 assessment 2.
+ *
+ * Description:           Alien ships will move from right to left, shifting down towards the player when they hit each side
+ *                        Aliens in the front row have the ability to shoot the player, these missiles can be destroyed with your own
+ *                        If an alien in the front row is destroyed, it passes the ability to shoot to the alien behind it
+ *                        The goal is to destroy all ships before you get hit by a missile or the aliens reach the bottom of the screen
+ *                        
+ *                        Player can move using the left and right keys
+ *                        Player can shoot a missile using the space bar
+ *  
+ *                        
+ *                         
+ *                     
+ * Known bugs:            Flickering still appearing on my monitors
+ *                        
+ *                        
+ *  
+ * Additional features:   Sound Effects
+ *                        Simple scoring system
+ *                        Ability to pause, restart, resume and exit game
+ *                        
+ */
+
 namespace Space_Invaders
 {
     public partial class Form1 : Form
@@ -12,20 +42,21 @@ namespace Space_Invaders
         public Form1()
         {
             InitializeComponent();
-            Width = Screen.PrimaryScreen.Bounds.Width;
-            Height = Screen.PrimaryScreen.Bounds.Height;
-            boundries = new Point(Width, Height);
-            graphics = CreateGraphics();
-            bufferImage = new Bitmap(Width, Height);
-            bufferGraphics = Graphics.FromImage(bufferImage);
             timer1.Enabled = false;
             DoubleBuffered = true;
-            rand = new Random();
-            controller = new Controller(boundries, graphics, rand, timer1);
-
             resume.Visible = false;
             menu.Visible = false;
 
+            Width = Screen.PrimaryScreen.Bounds.Width;
+            Height = Screen.PrimaryScreen.Bounds.Height;
+            boundries = new Point(Width, Height);
+
+            graphics = CreateGraphics();
+            bufferImage = new Bitmap(Width, Height);
+            bufferGraphics = Graphics.FromImage(bufferImage);
+
+            rand = new Random();
+            controller = new Controller(boundries, graphics, rand, timer1);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -51,7 +82,7 @@ namespace Space_Invaders
 
                 case Keys.Space:
                     controller.PlayerFire();
-                        break;
+                    break;
 
                 case Keys.P:
                     PauseMenu();

@@ -10,24 +10,21 @@ namespace Space_Invaders
     {
         protected Bitmap bitmap;
         protected Graphics graphics;
-        protected bool isAlive;
         protected Point position;
-
 
         protected int width;
         protected int height;
+        protected bool canShoot;
 
         //Main class for holding player and alien variables.
-
-        public Ships(Bitmap bitmap, Graphics graphics, bool isAlive, Point position, int width, int height)
+        public Ships(Bitmap bitmap, Graphics graphics, bool canShoot, Point position, int width, int height)
         {
             this.bitmap = bitmap;
             this.graphics = graphics;
-            this.isAlive = isAlive;
+            this.canShoot = canShoot;
             this.position = position;
             this.width = width;
             this.height = height;
-
         }
 
 
@@ -35,10 +32,7 @@ namespace Space_Invaders
         //Do not currently need an alive checking bool.
         public void DrawShips()
         {
-            //if (isAlive == true)
-            //{
             graphics.DrawImage(bitmap, position);
-            //}
         }
 
 
@@ -50,28 +44,21 @@ namespace Space_Invaders
             set { position = value; }
         }
 
-        public bool Alive
+        public bool CanShoot
         {
-            get { return isAlive; }
-            set { isAlive = value; }
+            get { return canShoot; }
+            set { canShoot = value; }
         }
 
         public int Width
         {
             get { return width; }
             set { width = value; }
-
         }
 
         public Rectangle rect()
         {
             return new Rectangle(position.X, position.Y, width, height);
-        }
-
-        public bool IsAlive
-        {
-            get { return IsAlive; }
-            set { IsAlive = value; }
         }
 
 
