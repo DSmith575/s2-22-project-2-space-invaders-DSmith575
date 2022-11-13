@@ -19,10 +19,7 @@ namespace Space_Invaders
         private Graphics graphics;
         private Bitmap alienS;
         private List<AlienShip> alienShips;
-        private List<BombList> bomb;
 
-        private Random rand;
-        private const int BOMBLIFE = 10;
 
 
 
@@ -37,10 +34,17 @@ namespace Space_Invaders
             {
                 for (int j = 0; j < ROWS; j++)
                 {
-                    alienShips.Add(new AlienShip(alienS, graphics, false, new Point(i * GAP, j * GAP), alienS.Width, alienS.Height));
+                   
+                    if (j == 3)
+                    {
+                        alienShips.Add(new AlienShip(alienS, graphics, true, new Point(i * GAP, j * GAP), alienS.Width, alienS.Height));
+                    }
+                    else
+                    {
+                        alienShips.Add(new AlienShip(alienS, graphics, false, new Point(i * GAP, j * GAP), alienS.Width, alienS.Height));
+                    }
                 }
             }
-            alienShips[alienShips.Count - 1].Alive = true;
         }
 
 
@@ -107,21 +111,6 @@ namespace Space_Invaders
                         break;
                 }
 
-         
-            }
-        
-        public void CanDropBomb()
-        {
-            for(int i = 0; i < alienShips.Count; i++)
-            {
-                if (alienShips[i].Alive == true)
-                {
-                    bomb[i].SpawnBombs(graphics, new Point(alienShips[i].Position.X, alienShips[i].Position.Y), rand.Next(0, BOMBLIFE));
-                    bomb[i].MoveBomb();
-                    bomb[i].DrawB();
-                }
-            }
-        }
-
+            }     
     }
     }

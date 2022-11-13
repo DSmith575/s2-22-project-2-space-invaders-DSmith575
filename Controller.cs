@@ -30,7 +30,7 @@ namespace Space_Invaders
         private int boundryWidth;
         private int boundryHeight;
 
-        
+
         public Controller(Point boundries, Graphics graphics, Random rand, Timer timer1)
         {
             this.graphics = graphics;
@@ -45,13 +45,13 @@ namespace Space_Invaders
         }
 
         //Main method that runs on every timer tick
-        //Draws player, the alien/missile fleet/list collision dection, and movement
+        // Draws objects (player, aliens, bombs, missiles
         public void GameRun()
         {
 
             DrawRun();
             CheckWin();
-            alienFleet.Movement();
+            //alienFleet.Movement();
             missileList.MoveMissile();
             missileList.LifeCheck();
             CollisionDetection();
@@ -62,14 +62,13 @@ namespace Space_Invaders
 
         }
 
+        //Runs on every timer tick, Draws every "image"
         public void DrawRun()
         {
             player.DrawShips();
             alienFleet.DrawFleet();
             missileList.DrawM();
             bomblist.DrawB();
-
-
         }
 
         //Method to set up variables for game control
@@ -77,7 +76,7 @@ namespace Space_Invaders
         {
             rand = new Random();
             playShip = Properties.Resources.Player;
-            boundryWidth = boundries.X; //Sets player X position to the value of boundries
+            boundryWidth = boundries.X;
             boundryHeight = boundries.Y;
             missileLaunch = new SoundPlayer(Properties.Resources.blaster);
             missileHit = new SoundPlayer(Properties.Resources.sfxS);
@@ -89,9 +88,7 @@ namespace Space_Invaders
         {
             player.Direction = direction;
             player.Move();
-
         }
-
 
         //On each space bar, creates a missile at the players location, with a random time limit on how long it can stay on screen
         //Each timer tick redues the life value
@@ -101,13 +98,16 @@ namespace Space_Invaders
             missileLaunch.Play();
         }
 
+
+        //Method to check each alien ship in the fleet list, if alien has the "Alive" status of true, it can drop a bomb
+        //Method runs a rand.next and if the value equals 0, that alien will created a bomb and add it to the list.
         public void DropBomb()
         {
-            for( int i = 0; i < alienFleet.AlienShips.Count; i++)
+            for (int i = 0; i < alienFleet.AlienShips.Count; i++)
             {
                 if (alienFleet.AlienShips[i].Alive == true)
                 {
-                    int bombChance = rand.Next(0, 9);
+                    int bombChance = rand.Next(0, 99);
                     if (bombChance == 0)
                     {
                         bomblist.SpawnBombs(graphics, new Point(alienFleet.AlienShips[i].Position.X, alienFleet.AlienShips[i].Position.Y), rand.Next(1, LIFELIMITTIME));
@@ -124,14 +124,34 @@ namespace Space_Invaders
             AlienCollisionMissile();
             AlienBoundryCollision();
             AlienPlayerCollision();
+            PlayerHitByBomb();
+            BombMissileCollision();
+        }
+
+        //O
+        public void BombMissileCollision()
+        {
+            for (int i = 0; i < missileList.PlayerMissiles.Count; i++)
+            {
+                for (int j = 0; j < bomblist.AlienBombs.Count; j++)
+                {
+                    if (missileList.PlayerMissiles[i].rect().IntersectsWith(bomblist.AlienBombs[j].rect()))
+                    {
+                        missileHit.Play();
+                        missileList.PlayerMissiles.Remove(missileList.PlayerMissiles[i]);
+                        bomblist.AlienBombs.Remove(bomblist.AlienBombs[j]);
+                        break;
+                    }
+                }
+            }
         }
 
         //Checks each row and column of alien fleet ships
         //if a missile touches an alien ship, both that missile and the alien ship are removed from their lists
         public void AlienCollisionMissile()
         {
-
             //Checks each missiles rectangle and if it touches an alien ship will remove both missile and alien from the form.
+            //Then checks if the destroyed ship had the Alive bool of true, and if so, passes it to the next ship
             for (int i = 0; i < missileList.PlayerMissiles.Count; i++)
             {
                 for (int j = 0; j < alienFleet.AlienShips.Count; j++)
@@ -140,28 +160,20 @@ namespace Space_Invaders
                     {
                         missileHit.Play();
                         missileList.PlayerMissiles.Remove(missileList.PlayerMissiles[i]);
-                        if (alienFleet.AlienShips[alienFleet.AlienShips.Count-1].Alive != true)
+                        if (alienFleet.AlienShips[j - 1].Alive != true)
                         {
-                            alienFleet.AlienShips[alienFleet.AlienShips.Count-1].Alive = true;
+                            alienFleet.AlienShips[j - 1].Alive = true;
                         }
                         alienFleet.AlienShips.Remove(alienFleet.AlienShips[j]);
-
-
-
                         break; //Break here else if keeps running while the list has been altered (out of bounds error)
-                        /*
-                         * 
-                         * j-10 bombDrop = true; (out of bounds)
-                         * if j-10 = nul
-                         * break;
-                         */
                     }
                 }
             }
         }
 
 
-
+        //Checks if the alienFleet List count is 0
+        //If true, disables the timer and displays that you have won.
         public void CheckWin()
         {
             if (alienFleet.AlienShips.Count == 0)
@@ -171,9 +183,21 @@ namespace Space_Invaders
             }
         }
 
+
+        //Checks each alien bombs rectangle touches the players rectangle
+        //If true, disables timer and displays you have lost
         public void PlayerHitByBomb()
         {
-            playerHit.Play();
+            for (int i = 0; i < bomblist.AlienBombs.Count; i++)
+            {
+                if (bomblist.AlienBombs[i].rect().IntersectsWith(player.rect()))
+                {
+                    playerHit.Play();
+                    timer1.Enabled = false;
+                    MessageBox.Show("You lose");
+                }
+            }
+
         }
 
         //Method to check if any alien ship in the fleet has hit the bottom of the screen
@@ -187,6 +211,7 @@ namespace Space_Invaders
                 if (alienFleet.AlienShips[i].Position.Y + alienFleet.AlienShips[i].Width >= boundryHeight)
                 {
                     timer1.Enabled = false;
+                    MessageBox.Show("You lose");
                     //MoveToScoring
                 }
             }
@@ -201,9 +226,10 @@ namespace Space_Invaders
             {
                 if (alienFleet.AlienShips[i].rect().IntersectsWith(player.rect()))
                 {
-                    timer1.Enabled = false;
-                    MessageBox.Show("Hit");
                     playerHit.Play();
+                    timer1.Enabled = false;
+                    MessageBox.Show("You lose");
+
                 }
             }
         }

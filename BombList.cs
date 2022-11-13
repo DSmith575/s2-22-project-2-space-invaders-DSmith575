@@ -49,7 +49,6 @@ namespace Space_Invaders
             {
                 alienBombs[i].BombMovement();
                 alienBombs[i].LifeLimit--;
-
             }
         }
 
