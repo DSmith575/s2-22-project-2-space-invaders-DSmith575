@@ -13,6 +13,7 @@ namespace Space_Invaders
     {
         //const variable dicating the last possible duration limit set by the rand for the value for missile/bomb "lifeLimit"
         private const int LIFELIMITTIME = 70;
+        private const int BOMBCHANCE = 99;
 
         private Bitmap playShip;
         private Graphics graphics;
@@ -32,6 +33,7 @@ namespace Space_Invaders
 
         private int boundryWidth;
         private int boundryHeight;
+        
 
         public Controller(Point boundries, Graphics graphics, Random rand, Timer timer1)
         {
@@ -122,7 +124,7 @@ namespace Space_Invaders
             {
                 if (alienFleet.AlienShips[i].CanShoot== true)
                 {
-                    int bombChance = rand.Next(0, 99);
+                    int bombChance = rand.Next(0, BOMBCHANCE);
                     if (bombChance == 0)
                     {
                         bomblist.SpawnBombs(graphics, new Point(alienFleet.AlienShips[i].Position.X, alienFleet.AlienShips[i].Position.Y), rand.Next(1, LIFELIMITTIME));
