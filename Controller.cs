@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Timer = System.Windows.Forms.Timer;
@@ -20,6 +22,9 @@ namespace Space_Invaders
         private BombList bomblist;
         private Graphics graphics;
         private Timer timer1;
+        private SoundPlayer missileLaunch;
+        private SoundPlayer playerHit;
+        private SoundPlayer missileHit;
 
 
         private int boundryWidth;
@@ -36,19 +41,25 @@ namespace Space_Invaders
             alienFleet = new AlienFleet(graphics);
             missileList = new MissileList(graphics);
             bomblist = new BombList(graphics);
-        }
 
+        }
 
         //Main method that runs on every timer tick
         //Draws player, the alien/missile fleet/list collision dection, and movement
         public void GameRun()
         {
+
             DrawRun();
+            CheckWin();
             alienFleet.Movement();
             missileList.MoveMissile();
             missileList.LifeCheck();
             CollisionDetection();
-\
+            DropBomb();
+            bomblist.MoveBomb();
+            bomblist.LifeCheckBomb();
+
+
         }
 
         public void DrawRun()
@@ -56,6 +67,9 @@ namespace Space_Invaders
             player.DrawShips();
             alienFleet.DrawFleet();
             missileList.DrawM();
+            bomblist.DrawB();
+
+
         }
 
         //Method to set up variables for game control
@@ -65,8 +79,9 @@ namespace Space_Invaders
             playShip = Properties.Resources.Player;
             boundryWidth = boundries.X; //Sets player X position to the value of boundries
             boundryHeight = boundries.Y;
-
-
+            missileLaunch = new SoundPlayer(Properties.Resources.blaster);
+            missileHit = new SoundPlayer(Properties.Resources.sfxS);
+            playerHit = new SoundPlayer(Properties.Resources.bomb);
         }
 
         //Method to move the player left and right
@@ -83,6 +98,23 @@ namespace Space_Invaders
         public void PlayerFire()
         {
             missileList.SpawnMissile(graphics, new Point(player.Position.X + 2, player.Position.Y), rand.Next(1, LIFELIMITTIME));
+            missileLaunch.Play();
+        }
+
+        public void DropBomb()
+        {
+            for( int i = 0; i < alienFleet.AlienShips.Count; i++)
+            {
+                if (alienFleet.AlienShips[i].Alive == true)
+                {
+                    int bombChance = rand.Next(0, 9);
+                    if (bombChance == 0)
+                    {
+                        bomblist.SpawnBombs(graphics, new Point(alienFleet.AlienShips[i].Position.X, alienFleet.AlienShips[i].Position.Y), rand.Next(1, LIFELIMITTIME));
+                        missileLaunch.Play();
+                    }
+                }
+            }
         }
 
 
@@ -106,12 +138,42 @@ namespace Space_Invaders
                 {
                     if (missileList.PlayerMissiles[i].rect().IntersectsWith(alienFleet.AlienShips[j].rect()))
                     {
+                        missileHit.Play();
                         missileList.PlayerMissiles.Remove(missileList.PlayerMissiles[i]);
+                        if (alienFleet.AlienShips[alienFleet.AlienShips.Count-1].Alive != true)
+                        {
+                            alienFleet.AlienShips[alienFleet.AlienShips.Count-1].Alive = true;
+                        }
                         alienFleet.AlienShips.Remove(alienFleet.AlienShips[j]);
-                        break;
+
+
+
+                        break; //Break here else if keeps running while the list has been altered (out of bounds error)
+                        /*
+                         * 
+                         * j-10 bombDrop = true; (out of bounds)
+                         * if j-10 = nul
+                         * break;
+                         */
                     }
                 }
             }
+        }
+
+
+
+        public void CheckWin()
+        {
+            if (alienFleet.AlienShips.Count == 0)
+            {
+                timer1.Enabled = false;
+                MessageBox.Show("You Win!");
+            }
+        }
+
+        public void PlayerHitByBomb()
+        {
+            playerHit.Play();
         }
 
         //Method to check if any alien ship in the fleet has hit the bottom of the screen
@@ -130,7 +192,6 @@ namespace Space_Invaders
             }
         }
 
-
         //Checks if anyalien Ships rectangle touches the players rectangle, disables the timer and moves the scoring method
         //Player loses
         public void AlienPlayerCollision()
@@ -140,13 +201,12 @@ namespace Space_Invaders
             {
                 if (alienFleet.AlienShips[i].rect().IntersectsWith(player.rect()))
                 {
-                    timer1.Enabled=false;
+                    timer1.Enabled = false;
                     MessageBox.Show("Hit");
+                    playerHit.Play();
                 }
             }
         }
-
-
 
 
 

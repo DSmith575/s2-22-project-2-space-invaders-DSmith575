@@ -9,7 +9,11 @@ namespace Space_Invaders
     public class BombList
     {
         private Bitmap bmp;
+        private Graphics graphics;
+        private const int BOMBLIFE = 10;
         private List<AlienBomb> alienBombs;
+        private List<AlienShip> alienShips;
+        private Random rand;
 
         public List<AlienBomb> AlienBombs { get => alienBombs; set => alienBombs = value; }
 
@@ -23,9 +27,10 @@ namespace Space_Invaders
         //Method to add alien bombs to the list.
         
         
-        public void SpawnBombs(Graphics graphics, Point velocity, int lifeLimit)
+        //Change this velocity JFC
+        public void SpawnBombs(Graphics graphics, Point position, int lifeLimit)
         {
-            alienBombs.Add(new AlienBomb(bmp, graphics, new Point(velocity.X, velocity.Y), bmp.Width, bmp.Height, lifeLimit));
+            alienBombs.Add(new AlienBomb(bmp, graphics, new Point(position.X +2, position.Y +2), bmp.Width, bmp.Height, lifeLimit));
         }
 
         //Draws bombs on screen when called
@@ -43,6 +48,8 @@ namespace Space_Invaders
             for (int i = 0; i < alienBombs.Count; i++)
             {
                 alienBombs[i].BombMovement();
+                alienBombs[i].LifeLimit--;
+
             }
         }
 

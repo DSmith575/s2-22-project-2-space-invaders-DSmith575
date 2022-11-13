@@ -10,7 +10,7 @@ namespace Space_Invaders
     public abstract class Weapon
     {
 
-        protected const int VELOCITY = 50;
+        protected const int VELOCITY = 20;
         protected Bitmap bmp;
         protected Graphics graphics;
         protected Point position;

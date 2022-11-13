@@ -68,6 +68,12 @@ namespace Space_Invaders
             return new Rectangle(position.X, position.Y, width, height);
         }
 
+        public bool IsAlive
+        {
+            get { return IsAlive; }
+            set { IsAlive = value; }
+        }
+
 
         public abstract void Move();
 

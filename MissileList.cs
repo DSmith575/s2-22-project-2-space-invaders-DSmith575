@@ -24,11 +24,11 @@ namespace Space_Invaders
 
 
         //Method to add missiles to list
-        public void SpawnMissile(Graphics graphics, Point velocity, int lifeLimit)
+        public void SpawnMissile(Graphics graphics, Point position, int lifeLimit)
         {
             if (playerMissiles.Count <= MAXONSCREEN)
             {
-                playerMissiles.Add(new PlayerMissile(bmp, graphics, new Point(velocity.X, velocity.Y), bmp.Width, bmp.Height, lifeLimit));
+                playerMissiles.Add(new PlayerMissile(bmp, graphics, new Point(position.X, position.Y), bmp.Width, bmp.Height, lifeLimit));
             }
         }
 

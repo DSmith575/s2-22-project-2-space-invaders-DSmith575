@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace Space_Invaders
 {
@@ -12,12 +13,18 @@ namespace Space_Invaders
         private const int GAP = 40;
         private const int ROWS = 4;
         private const int COLS = 10;
-        private const int DROPPOSY = 150;
+        private const int DROPPOSY = 100;
         private bool movement = false;
 
         private Graphics graphics;
         private Bitmap alienS;
         private List<AlienShip> alienShips;
+        private List<BombList> bomb;
+
+        private Random rand;
+        private const int BOMBLIFE = 10;
+
+
 
 
         public AlienFleet(Graphics graphics)
@@ -30,11 +37,13 @@ namespace Space_Invaders
             {
                 for (int j = 0; j < ROWS; j++)
                 {
-                    alienShips.Add(new AlienShip(alienS, graphics, true, new Point(i * GAP, j * GAP), alienS.Width, alienS.Height));
+                    alienShips.Add(new AlienShip(alienS, graphics, false, new Point(i * GAP, j * GAP), alienS.Width, alienS.Height));
                 }
-
             }
+            alienShips[alienShips.Count - 1].Alive = true;
         }
+
+
 
         public List<AlienShip> AlienShips { get => alienShips; set => alienShips = value; }
 
@@ -46,14 +55,11 @@ namespace Space_Invaders
             }
         }
 
-
         /// <summary>
         /// PUT THESE IN THEIR OWN METHODS
         /// </summary>
         public void Movement()
         {
-            
-
                 //If the first alien in list position 0 is less than or equal to 0 (Boundry of left screen)
                 //Will drop every alien ship down the Y Axis and switchs a bool to true to make the fleet move to the other side of the screen
                 if (alienShips[0].Position.X <= 0)
@@ -101,8 +107,21 @@ namespace Space_Invaders
                         break;
                 }
 
-
-
+         
+            }
+        
+        public void CanDropBomb()
+        {
+            for(int i = 0; i < alienShips.Count; i++)
+            {
+                if (alienShips[i].Alive == true)
+                {
+                    bomb[i].SpawnBombs(graphics, new Point(alienShips[i].Position.X, alienShips[i].Position.Y), rand.Next(0, BOMBLIFE));
+                    bomb[i].MoveBomb();
+                    bomb[i].DrawB();
+                }
             }
         }
+
+    }
     }
