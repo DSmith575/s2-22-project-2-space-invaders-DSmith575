@@ -1,6 +1,8 @@
 # Diagram
 <br>
 <img src ="ClassDiagram1.png">
+<br>
+Game may behave differently on a laptop screen compared to monitor
 
 # References
 <br>
