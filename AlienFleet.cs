@@ -22,7 +22,7 @@ namespace Space_Invaders
 
 
 
-
+        public List<AlienShip> AlienShips { get => alienShips; set => alienShips = value; }
 
         public AlienFleet(Graphics graphics)
         {
@@ -34,8 +34,9 @@ namespace Space_Invaders
             {
                 for (int j = 0; j < ROWS; j++)
                 {
-                   
-                    if (j == 3)
+                    //If J is equal to 3 adds an alien ship with the alive bool of true, this allows it to be able to drop a bomb, if not equal to three
+                    //Creates a ship with the bool set to false.
+                    if (j == 3) 
                     {
                         alienShips.Add(new AlienShip(alienS, graphics, true, new Point(i * GAP, j * GAP), alienS.Width, alienS.Height));
                     }
@@ -47,10 +48,6 @@ namespace Space_Invaders
             }
         }
 
-
-
-        public List<AlienShip> AlienShips { get => alienShips; set => alienShips = value; }
-
         public void DrawFleet()
         {
             foreach (AlienShip fleet in alienShips)
@@ -59,9 +56,6 @@ namespace Space_Invaders
             }
         }
 
-        /// <summary>
-        /// PUT THESE IN THEIR OWN METHODS
-        /// </summary>
         public void Movement()
         {
                 //If the first alien in list position 0 is less than or equal to 0 (Boundry of left screen)
@@ -87,9 +81,7 @@ namespace Space_Invaders
                 }
 
 
-                //Checks current state of the bool variable and runs the appropriate movement method
-
-
+                //Checks current state of the movmenet bool variable and runs the appropriate movement method
                 switch (movement)
                 {
                     case false:

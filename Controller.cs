@@ -51,15 +51,11 @@ namespace Space_Invaders
 
             DrawRun();
             CheckWin();
-            //alienFleet.Movement();
-            missileList.MoveMissile();
-            missileList.LifeCheck();
+            MoveObjects();
             CollisionDetection();
             DropBomb();
-            bomblist.MoveBomb();
+            missileList.LifeCheck();
             bomblist.LifeCheckBomb();
-
-
         }
 
         //Runs on every timer tick, Draws every "image"
@@ -69,6 +65,15 @@ namespace Space_Invaders
             alienFleet.DrawFleet();
             missileList.DrawM();
             bomblist.DrawB();
+        }
+
+
+        //Method containing all objects movement methods
+        public void MoveObjects()
+        {
+            alienFleet.Movement();
+            missileList.MoveMissile();
+            bomblist.MoveBomb();
         }
 
         //Method to set up variables for game control
@@ -160,13 +165,61 @@ namespace Space_Invaders
                     {
                         missileHit.Play();
                         missileList.PlayerMissiles.Remove(missileList.PlayerMissiles[i]);
-                        if (alienFleet.AlienShips[j - 1].Alive != true)
+                        if (alienFleet.AlienShips[j - 1].Alive != true) //(39 > 38) COLS before Rows
                         {
                             alienFleet.AlienShips[j - 1].Alive = true;
                         }
                         alienFleet.AlienShips.Remove(alienFleet.AlienShips[j]);
                         break; //Break here else if keeps running while the list has been altered (out of bounds error)
                     }
+                }
+            }
+        }
+
+
+
+        //Checks each alien bombs rectangle touches the players rectangle
+        //If true, disables timer and displays you have lost
+        public void PlayerHitByBomb()
+        {
+            for (int i = 0; i < bomblist.AlienBombs.Count; i++)
+            {
+                if (bomblist.AlienBombs[i].rect().IntersectsWith(player.rect()))
+                {
+                    playerHit.Play();
+                    CheckLose();
+                }
+            }
+
+        }
+
+        //Method to check if any alien ship in the fleet has hit the bottom of the screen
+        //Stops the timer and runs the scoring method.
+        //Player loses
+        public void AlienBoundryCollision()
+        {
+
+            for (int i = 0; i < alienFleet.AlienShips.Count; i++)
+            {
+                if (alienFleet.AlienShips[i].Position.Y + alienFleet.AlienShips[i].Width >= boundryHeight)
+                {
+                    CheckLose();
+                }
+            }
+        }
+
+        //Checks if anyalien Ships rectangle touches the players rectangle, disables the timer and moves the scoring method
+        //Player loses
+        public void AlienPlayerCollision()
+        {
+
+            for (int i = 0; i < alienFleet.AlienShips.Count; i++)
+            {
+                if (alienFleet.AlienShips[i].rect().IntersectsWith(player.rect()))
+                {
+                    playerHit.Play();
+                    CheckLose();
+
                 }
             }
         }
@@ -184,55 +237,15 @@ namespace Space_Invaders
         }
 
 
-        //Checks each alien bombs rectangle touches the players rectangle
-        //If true, disables timer and displays you have lost
-        public void PlayerHitByBomb()
+        //Method called when some criteria of playing hit collision is triggered
+        public void CheckLose()
         {
-            for (int i = 0; i < bomblist.AlienBombs.Count; i++)
-            {
-                if (bomblist.AlienBombs[i].rect().IntersectsWith(player.rect()))
-                {
-                    playerHit.Play();
-                    timer1.Enabled = false;
-                    MessageBox.Show("You lose");
-                }
-            }
-
+            timer1.Enabled = false;
+            MessageBox.Show("You lose");
+            //Move to scoring
         }
 
-        //Method to check if any alien ship in the fleet has hit the bottom of the screen
-        //Stops the timer and runs the scoring method.
-        //Player loses
-        public void AlienBoundryCollision()
-        {
 
-            for (int i = 0; i < alienFleet.AlienShips.Count; i++)
-            {
-                if (alienFleet.AlienShips[i].Position.Y + alienFleet.AlienShips[i].Width >= boundryHeight)
-                {
-                    timer1.Enabled = false;
-                    MessageBox.Show("You lose");
-                    //MoveToScoring
-                }
-            }
-        }
-
-        //Checks if anyalien Ships rectangle touches the players rectangle, disables the timer and moves the scoring method
-        //Player loses
-        public void AlienPlayerCollision()
-        {
-
-            for (int i = 0; i < alienFleet.AlienShips.Count; i++)
-            {
-                if (alienFleet.AlienShips[i].rect().IntersectsWith(player.rect()))
-                {
-                    playerHit.Play();
-                    timer1.Enabled = false;
-                    MessageBox.Show("You lose");
-
-                }
-            }
-        }
 
 
 
