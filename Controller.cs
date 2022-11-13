@@ -132,11 +132,7 @@ namespace Space_Invaders
             }
         }
 
-
-
-
-
-        //O
+        //Checks if alien bombs and player missiles collide, if so removes both from the form
         public void BombMissileCollision()
         {
             for (int i = 0; i < missileList.PlayerMissiles.Count; i++)
