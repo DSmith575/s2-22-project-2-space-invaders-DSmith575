@@ -25,6 +25,7 @@ namespace Space_Invaders
         private SoundPlayer missileLaunch;
         private SoundPlayer playerHit;
         private SoundPlayer missileHit;
+        private Scores scores;
 
 
         private int boundryWidth;
@@ -54,6 +55,7 @@ namespace Space_Invaders
             missileLaunch = new SoundPlayer(Properties.Resources.blaster);
             missileHit = new SoundPlayer(Properties.Resources.sfxS);
             playerHit = new SoundPlayer(Properties.Resources.bomb);
+            scores = new Scores();
 
         }
 
@@ -203,6 +205,7 @@ namespace Space_Invaders
                 {
                     playerHit.Play();
                     CheckLose();
+                    break;
                 }
             }
 
@@ -219,6 +222,7 @@ namespace Space_Invaders
                 if (alienFleet.AlienShips[i].Position.Y + alienFleet.AlienShips[i].Width >= boundryHeight)
                 {
                     CheckLose();
+                    break;
                 }
             }
         }
@@ -234,7 +238,7 @@ namespace Space_Invaders
                 {
                     playerHit.Play();
                     CheckLose();
-
+                    break;
                 }
             }
         }
@@ -248,6 +252,8 @@ namespace Space_Invaders
             {
                 timer1.Enabled = false;
                 MessageBox.Show("You Win!");
+                scores.StoreScores(0);
+                Application.Restart();
             }
         }
 
@@ -257,8 +263,10 @@ namespace Space_Invaders
         {
             timer1.Enabled = false;
             MessageBox.Show("You lose");
-            //Move to scoring
+            scores.StoreScores(1);
+            Application.Restart();
         }
+
 
 
 

@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Space_Invaders.AlienBomb">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AlienBomb.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.AlienFleet">
+    <Position X="12" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAEAACEAAAABAEAAAAAABABAAgAAQBAAAACAAA=</HashCode>
+      <FileName>AlienFleet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.AlienShip">
+    <Position X="10.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAABAAAAAAACAAAAAAAAAAIQAAAAAAAAAA=</HashCode>
+      <FileName>AlienShip.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.BombList">
+    <Position X="15.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAABAAAEAAAIAAAACAAAAAgAAAAAAAAAAAAIIAAA=</HashCode>
+      <FileName>BombList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.Controller">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAagAIAAABAAgJgECIAJYAQIAQAAAAgFAEAAAgBJEAA=</HashCode>
+      <FileName>Controller.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.Form1">
+    <Position X="19" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>KATAAYAAALAAQBEAAgCAAAkCAAAAIAgAAAAhAAAABAA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.MissileList">
+    <Position X="13.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAgAAAIAAAAGAAAAAAAACAACAAAEAAAAAAA=</HashCode>
+      <FileName>MissileList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.Player">
+    <Position X="12" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAIAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.PlayerMissile">
+    <Position X="8.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>PlayerMissile.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.Scores">
+    <Position X="15.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgQABAAAAAEAABAAAAICAIIEEAACAAAAAAAAAAAA=</HashCode>
+      <FileName>Scores.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.Ships">
+    <Position X="10.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAIAAAAQgQAAAIEAIAAAAAAwgAAAAAAEAAAA=</HashCode>
+      <FileName>Ships.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Space_Invaders.Weapon">
+    <Position X="6.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAAABAAABAYgQAAAIEAAAAAAAAgIAAAAEABAAAA=</HashCode>
+      <FileName>Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Space_Invaders.EDirection">
+    <Position X="13.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACACAAAAAAAA=</HashCode>
+      <FileName>EDirection.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
